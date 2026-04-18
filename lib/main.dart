@@ -20,6 +20,8 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
+
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
@@ -160,25 +162,10 @@ class _MyHomePageState extends State<MyHomePage> {
                                 ),
                               );
                               return Scaffold(
-                                appBar: AppBar(
-                                  actions: [
-                                    IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(Icons.call),
-                                    ),
-                                    IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(Icons.videocam),
-                                    ),
-                                    IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(Icons.more_vert),
-                                    ),
-                                  ],
-                                  title: Text('Moussa Diakité'),
-                                ),
-                                bottomNavigationBar: Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
+                                appBar: AppBar(title: Text('Moussa Diakité')),
+
+                                // ✅ LES MESSAGES ICI (dans body)
+                                body: Column(
                                   children: [
                                     Expanded(
                                       child: ListView.builder(
@@ -190,12 +177,57 @@ class _MyHomePageState extends State<MyHomePage> {
                                         },
                                       ),
                                     ),
-                                    safeArea,
                                   ],
                                 ),
-                                body: Center(
-                                  child: Text(
-                                    'Bienvenue dans le chat de Moussa Diakité!',
+
+                                // ✅ INPUT ICI (en bas)
+                                bottomNavigationBar: SafeArea(
+                                  child: Padding(
+                                    padding: EdgeInsets.only(
+                                      bottom: MediaQuery.of(
+                                        context,
+                                      ).viewInsets.bottom,
+                                      left: 8,
+                                      right: 8,
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        IconButton(
+                                          icon: Icon(Icons.emoji_emotions),
+                                          onPressed: () {},
+                                        ),
+
+                                        Expanded(
+                                          child: TextField(
+                                            controller:
+                                                _messageController, // ✅ TRÈS IMPORTANT
+                                            decoration: InputDecoration(
+                                              hintText: "Message",
+                                              border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(30),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+
+                                        IconButton(
+                                          icon: Icon(Icons.send),
+                                          onPressed: () {
+                                            if (_messageController
+                                                .text
+                                                .isNotEmpty) {
+                                              setState(() {
+                                                messages.add(
+                                                  _messageController.text,
+                                                );
+                                                _messageController.clear();
+                                              });
+                                            }
+                                          },
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               );
@@ -206,117 +238,20 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     ListTile(
                       leading: CircleAvatar(
-                        backgroundImage: AssetImage('assets/5.webp'),
+                        backgroundImage: AssetImage('assets/3.webp'),
                       ),
                       title: Text(
-                        'Souaré Bathily',
+                        'Kandjoura',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
-                      subtitle: Text('Hello, how are you?'),
-                      trailing: Text('12:30 PM'),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Scaffold(
-                              appBar: AppBar(
-                                actions: [
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(Icons.call),
-                                  ),
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(Icons.videocam),
-                                  ),
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(Icons.more_vert),
-                                  ),
-                                ],
-                                title: Text('Souaré Bathily'),
-                              ),
-                              bottomNavigationBar: Padding(
-                                padding:
-                                    EdgeInsets.only(
-                                      bottom: 24.0,
-                                      left: 16.0,
-                                      right: 16.0,
-                                    ).add(
-                                      EdgeInsets.only(
-                                        bottom: MediaQuery.of(
-                                          context,
-                                        ).viewInsets.bottom,
-                                      ),
-                                    ),
-                                child: TextField(
-                                  decoration: InputDecoration(
-                                    hintText: 'Message',
-                                    contentPadding: EdgeInsets.symmetric(
-                                      horizontal: 16,
-                                    ),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(30),
-                                    ),
-
-                                    suffixIcon: IconButton(
-                                      icon: Icon(Icons.send),
-                                      onPressed: () {
-                                        // Handle send button press
-                                      },
-                                    ),
-                                    prefixIcon: IconButton(
-                                      icon: Icon(Icons.emoji_emotions),
-                                      onPressed: () {
-                                        // Handle emoji button press
-                                      },
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              body: Center(
-                                child: Text(
-                                  'Bienvenue dans le chat de Souaré Bathily!',
-                                ),
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                    ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: AssetImage('assets/4.jpg'),
-                      ),
-                      title: Text(
-                        'Amara SACKO',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      subtitle: Text('Hello, how are you?'),
+                      subtitle: Text('Hi, it is me bro!'),
                       trailing: Text('Hier'),
                       onTap: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => Scaffold(
-                              appBar: AppBar(
-                                actions: [
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(Icons.call),
-                                  ),
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(Icons.videocam),
-                                  ),
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(Icons.more_vert),
-                                  ),
-                                ],
-                                title: Text('Amara SACKO'),
-                              ),
-                              bottomNavigationBar: SafeArea(
+                            builder: (context) {
+                              var safeArea = SafeArea(
                                 child: Padding(
                                   padding:
                                       EdgeInsets.only(
@@ -332,6 +267,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                       ),
                                   child: TextField(
                                     decoration: InputDecoration(
+                                      alignLabelWithHint: true,
+                                      isDense: true,
                                       hintText: 'Message',
                                       contentPadding: EdgeInsets.symmetric(
                                         horizontal: 16,
@@ -344,6 +281,16 @@ class _MyHomePageState extends State<MyHomePage> {
                                         icon: Icon(Icons.send),
                                         onPressed: () {
                                           // Handle send button press
+                                          if (_messageController
+                                              .text
+                                              .isNotEmpty) {
+                                            setState(() {
+                                              messages.add(
+                                                _messageController.text,
+                                              );
+                                              _messageController.clear();
+                                            });
+                                          }
                                         },
                                       ),
                                       prefixIcon: IconButton(
@@ -355,587 +302,85 @@ class _MyHomePageState extends State<MyHomePage> {
                                     ),
                                   ),
                                 ),
-                              ),
-                              body: Center(
-                                child: Text(
-                                  'Bienvenue dans le chat de Amara SACKO!',
+                              );
+                              return Scaffold(
+                                appBar: AppBar(
+                                  title: Text(
+                                    'Kandjoura',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                    ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: AssetImage('assets/3.webp'),
-                      ),
-                      title: Text(
-                        'Djomba Tounkara',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      subtitle: Text('Hello, how are you?'),
-                      trailing: Text('12:30 PM'),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Scaffold(
-                              appBar: AppBar(
-                                actions: [
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(Icons.call),
-                                  ),
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(Icons.videocam),
-                                  ),
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(Icons.more_vert),
-                                  ),
-                                ],
-                                title: Text('Djomba Tounkara'),
-                              ),
-                              bottomNavigationBar: SafeArea(
-                                child: Padding(
-                                  padding:
-                                      EdgeInsets.only(
-                                        bottom: 24.0,
-                                        left: 16.0,
-                                        right: 16.0,
-                                      ).add(
-                                        EdgeInsets.only(
-                                          bottom: MediaQuery.of(
-                                            context,
-                                          ).viewInsets.bottom,
+
+                                // ✅ LES MESSAGES ICI (dans body)
+                                body: Column(
+                                  children: [
+                                    Expanded(
+                                      child: ListView.builder(
+                                        itemCount: messages.length,
+                                        itemBuilder: (context, index) {
+                                          return ListTile(
+                                            title: Text(messages[index]),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                ),
+
+                                // ✅ INPUT ICI (en bas)
+                                bottomNavigationBar: SafeArea(
+                                  child: Padding(
+                                    padding: EdgeInsets.only(
+                                      bottom: MediaQuery.of(
+                                        context,
+                                      ).viewInsets.bottom,
+                                      left: 8,
+                                      right: 8,
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        IconButton(
+                                          icon: Icon(Icons.emoji_emotions),
+                                          onPressed: () {},
                                         ),
-                                      ),
-                                  child: TextField(
-                                    decoration: InputDecoration(
-                                      hintText: 'Message',
-                                      contentPadding: EdgeInsets.symmetric(
-                                        horizontal: 16,
-                                      ),
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(30),
-                                      ),
 
-                                      suffixIcon: IconButton(
-                                        icon: Icon(Icons.send),
-                                        onPressed: () {
-                                          // Handle send button press
-                                        },
-                                      ),
-                                      prefixIcon: IconButton(
-                                        icon: Icon(Icons.emoji_emotions),
-                                        onPressed: () {
-                                          // Handle emoji button press
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              body: Center(
-                                child: Text(
-                                  'Bienvenue dans le chat de Djomba Tounkara!',
-                                ),
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                    ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: AssetImage('assets/5.webp'),
-                      ),
-                      title: Text(
-                        'Boulaye Sendé',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      subtitle: Text('Hello, how are you?'),
-                      trailing: Text('12:30 PM'),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Scaffold(
-                              appBar: AppBar(
-                                actions: [
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(Icons.call),
-                                  ),
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(Icons.videocam),
-                                  ),
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(Icons.more_vert),
-                                  ),
-                                ],
-                                title: Text('Boulaye Sendé'),
-                              ),
-                              bottomNavigationBar: SafeArea(
-                                child: Padding(
-                                  padding:
-                                      EdgeInsets.only(
-                                        bottom: 24.0,
-                                        left: 16.0,
-                                        right: 16.0,
-                                      ).add(
-                                        EdgeInsets.only(
-                                          bottom: MediaQuery.of(
-                                            context,
-                                          ).viewInsets.bottom,
+                                        Expanded(
+                                          child: TextField(
+                                            controller:
+                                                _messageController, // ✅ TRÈS IMPORTANT
+                                            decoration: InputDecoration(
+                                              hintText: "Message",
+                                              border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(30),
+                                              ),
+                                            ),
+                                          ),
                                         ),
-                                      ),
-                                  child: TextField(
-                                    decoration: InputDecoration(
-                                      hintText: 'Message',
-                                      contentPadding: EdgeInsets.symmetric(
-                                        horizontal: 16,
-                                      ),
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(30),
-                                      ),
 
-                                      suffixIcon: IconButton(
-                                        icon: Icon(Icons.send),
-                                        onPressed: () {
-                                          // Handle send button press
-                                        },
-                                      ),
-                                      prefixIcon: IconButton(
-                                        icon: Icon(Icons.emoji_emotions),
-                                        onPressed: () {
-                                          // Handle emoji button press
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              body: Center(
-                                child: Text(
-                                  'Bienvenue dans le chat de Boulaye Sendé  !',
-                                ),
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                    ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: AssetImage('assets/7.jpg'),
-                      ),
-                      title: Text(
-                        'Hawa Diarra',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      subtitle: Text('Je suis à ton service'),
-                      trailing: Text('Mardi'),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Scaffold(
-                              appBar: AppBar(
-                                actions: [
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(Icons.call),
-                                  ),
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(Icons.videocam),
-                                  ),
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(Icons.more_vert),
-                                  ),
-                                ],
-                                title: Text('Hawa Diarra'),
-                              ),
-                              bottomNavigationBar: SafeArea(
-                                child: Padding(
-                                  padding:
-                                      EdgeInsets.only(
-                                        bottom: 24.0,
-                                        left: 16.0,
-                                        right: 16.0,
-                                      ).add(
-                                        EdgeInsets.only(
-                                          bottom: MediaQuery.of(
-                                            context,
-                                          ).viewInsets.bottom,
+                                        IconButton(
+                                          icon: Icon(Icons.send),
+                                          onPressed: () {
+                                            if (_messageController
+                                                .text
+                                                .isNotEmpty) {
+                                              setState(() {
+                                                messages.add(
+                                                  _messageController.text,
+                                                );
+                                                _messageController.clear();
+                                              });
+                                            }
+                                          },
                                         ),
-                                      ),
-                                  child: TextField(
-                                    decoration: InputDecoration(
-                                      hintText: 'Message',
-                                      contentPadding: EdgeInsets.symmetric(
-                                        horizontal: 16,
-                                      ),
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(30),
-                                      ),
-
-                                      suffixIcon: IconButton(
-                                        icon: Icon(Icons.send),
-                                        onPressed: () {
-                                          // Handle send button press
-                                        },
-                                      ),
-                                      prefixIcon: IconButton(
-                                        icon: Icon(Icons.emoji_emotions),
-                                        onPressed: () {
-                                          // Handle emoji button press
-                                        },
-                                      ),
+                                      ],
                                     ),
                                   ),
                                 ),
-                              ),
-                              body: Center(
-                                child: Text(
-                                  'Bienvenue dans le chat de Hawa Diarra!',
-                                ),
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                    ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: AssetImage('assets/6.jpeg'),
-                      ),
-                      title: Text(
-                        'Mariam Soumaré',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      subtitle: Text('Hello, how are you?'),
-                      trailing: Text('08:30'),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Scaffold(
-                              appBar: AppBar(
-                                actions: [
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(Icons.call),
-                                  ),
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(Icons.videocam),
-                                  ),
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(Icons.more_vert),
-                                  ),
-                                ],
-                                title: Text('Mariam Soumaré'),
-                              ),
-                              bottomNavigationBar: SafeArea(
-                                child: Padding(
-                                  padding:
-                                      EdgeInsets.only(
-                                        bottom: 24.0,
-                                        left: 16.0,
-                                        right: 16.0,
-                                      ).add(
-                                        EdgeInsets.only(
-                                          bottom: MediaQuery.of(
-                                            context,
-                                          ).viewInsets.bottom,
-                                        ),
-                                      ),
-                                  child: TextField(
-                                    decoration: InputDecoration(
-                                      hintText: 'Message',
-                                      contentPadding: EdgeInsets.symmetric(
-                                        horizontal: 16,
-                                      ),
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(30),
-                                      ),
-
-                                      suffixIcon: IconButton(
-                                        icon: Icon(Icons.send),
-                                        onPressed: () {
-                                          // Handle send button press
-                                        },
-                                      ),
-                                      prefixIcon: IconButton(
-                                        icon: Icon(Icons.emoji_emotions),
-                                        onPressed: () {
-                                          // Handle emoji button press
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              body: Center(
-                                child: Text(
-                                  'Bienvenue dans le chat de Mariam Soumaré!',
-                                ),
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                    ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: AssetImage('assets/7.jpg'),
-                      ),
-                      title: Text(
-                        'TIREAR Maro',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      subtitle: Text('Femme me......'),
-                      trailing: Text('Vendredi'),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Scaffold(
-                              appBar: AppBar(
-                                actions: [
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(Icons.call),
-                                  ),
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(Icons.videocam),
-                                  ),
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(Icons.more_vert),
-                                  ),
-                                ],
-                                title: Text('TIREAR Maro'),
-                              ),
-                              bottomNavigationBar: SafeArea(
-                                child: Padding(
-                                  padding:
-                                      EdgeInsets.only(
-                                        bottom: 24.0,
-                                        left: 16.0,
-                                        right: 16.0,
-                                      ).add(
-                                        EdgeInsets.only(
-                                          bottom: MediaQuery.of(
-                                            context,
-                                          ).viewInsets.bottom,
-                                        ),
-                                      ),
-                                  child: TextField(
-                                    decoration: InputDecoration(
-                                      hintText: 'Message',
-                                      contentPadding: EdgeInsets.symmetric(
-                                        horizontal: 16,
-                                      ),
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(30),
-                                      ),
-
-                                      suffixIcon: IconButton(
-                                        icon: Icon(Icons.send),
-                                        onPressed: () {
-                                          // Handle send button press
-                                        },
-                                      ),
-                                      prefixIcon: IconButton(
-                                        icon: Icon(Icons.emoji_emotions),
-                                        onPressed: () {
-                                          // Handle emoji button press
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              body: Center(
-                                child: Text(
-                                  'Bienvenue dans le chat de TIREAR Maro!',
-                                ),
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                    ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: AssetImage('assets/4.jpg'),
-                      ),
-                      title: Text(
-                        'Natha Nadi',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      subtitle: Text('Hello, how are you?'),
-                      trailing: Text('12:30 PM'),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Scaffold(
-                              appBar: AppBar(
-                                actions: [
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(Icons.call),
-                                  ),
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(Icons.videocam),
-                                  ),
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(Icons.more_vert),
-                                  ),
-                                ],
-                                title: Text('Natha Nadi'),
-                              ),
-                              bottomNavigationBar: SafeArea(
-                                child: Padding(
-                                  padding:
-                                      EdgeInsets.only(
-                                        bottom: 24.0,
-                                        left: 16.0,
-                                        right: 16.0,
-                                      ).add(
-                                        EdgeInsets.only(
-                                          bottom: MediaQuery.of(
-                                            context,
-                                          ).viewInsets.bottom,
-                                        ),
-                                      ),
-                                  child: TextField(
-                                    decoration: InputDecoration(
-                                      hintText: 'Message',
-                                      contentPadding: EdgeInsets.symmetric(
-                                        horizontal: 16,
-                                      ),
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(30),
-                                      ),
-
-                                      suffixIcon: IconButton(
-                                        icon: Icon(Icons.send),
-                                        onPressed: () {
-                                          // Handle send button press
-                                        },
-                                      ),
-                                      prefixIcon: IconButton(
-                                        icon: Icon(Icons.emoji_emotions),
-                                        onPressed: () {
-                                          // Handle emoji button press
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              body: Center(
-                                child: Text(
-                                  'Bienvenue dans le chat de Natha Nadi!',
-                                ),
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                    ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: AssetImage('assets/5.webp'),
-                      ),
-                      title: Text(
-                        'Sori Bakayoko',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      subtitle: Text('Hello, how are you?'),
-                      trailing: Text('12:30 PM'),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Scaffold(
-                              appBar: AppBar(
-                                actions: [
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(Icons.call),
-                                  ),
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(Icons.videocam),
-                                  ),
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(Icons.more_vert),
-                                  ),
-                                ],
-                                title: Text('Sori Bakayoko'),
-                              ),
-                              bottomNavigationBar: SafeArea(
-                                child: Padding(
-                                  padding:
-                                      EdgeInsets.only(
-                                        bottom: 24.0,
-                                        left: 16.0,
-                                        right: 16.0,
-                                      ).add(
-                                        EdgeInsets.only(
-                                          bottom: MediaQuery.of(
-                                            context,
-                                          ).viewInsets.bottom,
-                                        ),
-                                      ),
-                                  child: TextField(
-                                    decoration: InputDecoration(
-                                      hintText: 'Message',
-                                      contentPadding: EdgeInsets.symmetric(
-                                        horizontal: 16,
-                                      ),
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(30),
-                                      ),
-
-                                      suffixIcon: IconButton(
-                                        icon: Icon(Icons.send),
-                                        onPressed: () {
-                                          // Handle send button press
-                                        },
-                                      ),
-                                      prefixIcon: IconButton(
-                                        icon: Icon(Icons.emoji_emotions),
-                                        onPressed: () {
-                                          // Handle emoji button press
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              body: Center(
-                                child: Text(
-                                  'Bienvenue dans le chat de Sori Bakayoko!',
-                                ),
-                              ),
-                            ),
+                              );
+                            },
                           ),
                         );
                       },
